@@ -5,6 +5,7 @@ package view;
 
 import bll.KhoaHocBLL;
 import dal.Data;
+import entity.Diem;
 import entity.KhoaHoc;
 
 /**
@@ -30,6 +31,10 @@ public class Main {
                 KhoaHoc khoaHoc = new KhoaHoc('1', "Java Core 58");
                 khoaHocBLL.insert(khoaHoc);
 
+                Diem diem = new Diem();
+                if (diem.sinhVien == null) {
+                        System.out.println("null");
+                }
         }
 
 }

@@ -18,6 +18,7 @@ public class Diem {
         private int diemLan1;
         // điểm lần 2
         private int diemLan2;
+        public SinhVien sinhVien;
 
         /**
          * 
