@@ -30,11 +30,7 @@ public class Main {
                 KhoaHocBLL khoaHocBLL = new KhoaHocBLL();
                 KhoaHoc khoaHoc = new KhoaHoc('1', "Java Core 58");
                 khoaHocBLL.insert(khoaHoc);
-
-                Diem diem = new Diem();
-                if (diem.sinhVien == null) {
-                        System.out.println("null");
-                }
+               
         }
 
 }
