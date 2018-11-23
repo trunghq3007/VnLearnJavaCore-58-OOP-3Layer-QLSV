@@ -3,6 +3,8 @@
  */
 package view;
 
+import java.util.List;
+
 import bll.KhoaHocBLL;
 import dal.Data;
 import entity.Diem;
@@ -24,13 +26,14 @@ public class Main {
          * @param args
          */
         public static void main(String[] args) {
-                // mockupda data
-                Data.mockData();
+                List<Object> listKH;
                 // khai báo và khởi tạo
                 KhoaHocBLL khoaHocBLL = new KhoaHocBLL();
-                KhoaHoc khoaHoc = new KhoaHoc('1', "Java Core 58");
-                khoaHocBLL.insert(khoaHoc);
-               
+                // KhoaHoc khoaHoc = new KhoaHoc('1', "Java Core 58");
+                // khoaHocBLL.insert(khoaHoc);
+                listKH = khoaHocBLL.getList("select * from KhoaHoc");
+                System.out.println(listKH.size()+"");
+
         }
 
 }

@@ -3,6 +3,8 @@
  */
 package dal;
 
+import java.util.List;
+
 import entity.Diem;
 
 /**
@@ -38,6 +40,15 @@ public class DiemDAL implements DataAccessInterface {
         @Override
         public void update(Object object) {
 
+        }
+
+        /* (non-Javadoc)
+         * @see dal.DataAccessInterface#getList()
+         */
+        @Override
+        public List<Object> getList(String sql) {
+                
+                return null;
         }
 
 }

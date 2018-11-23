@@ -15,7 +15,7 @@ public class DbConnection {
         // driver
         static final String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
         // url
-        static final String URL = "jdbc:sqlserver://localhost:1433;instance=SQLEXPRESS;databaseName=QLSV";
+        static final String URL = "jdbc:sqlserver://localhost:1433;instance=SQLEXPRESS;databaseName=QLSV;integratedSecurity=true;";
         // userName
         static final String USER_NAME = "";
         // passWord

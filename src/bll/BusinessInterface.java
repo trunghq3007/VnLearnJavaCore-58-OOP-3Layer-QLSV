@@ -3,6 +3,8 @@
  */
 package bll;
 
+import java.util.List;
+
 /**
  * @author HQTrung
  *
@@ -52,5 +54,17 @@ public interface BusinessInterface {
          * @param objects
          */
         void show(Object[] objects);
+
+        /**
+         * Create by: HQTrung - CTO VnLearn
+         * Create date: Nov 23, 2018
+         * Modifier: HQTrung
+         * Modified date: Nov 23, 2018
+         * Description: ....
+         * Version 1.0
+         * @param sql
+         * @return
+         */
+        public List<Object> getList(String sql);
 
 }

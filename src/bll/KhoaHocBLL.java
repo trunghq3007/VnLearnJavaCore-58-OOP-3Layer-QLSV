@@ -3,6 +3,8 @@
  */
 package bll;
 
+import java.util.List;
+
 import dal.Data;
 import dal.KhoaHocDAL;
 
@@ -45,6 +47,12 @@ public class KhoaHocBLL implements BusinessInterface {
 
         @Override
         public void show(Object[] objects) {
+
+        }
+
+        @Override
+        public List<Object> getList(String sql) {
+                return khoaHocDAL.getList(sql);
 
         }
 

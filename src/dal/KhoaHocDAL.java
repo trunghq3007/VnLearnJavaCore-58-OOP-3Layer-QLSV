@@ -3,6 +3,14 @@
  */
 package dal;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import common.DbConnection;
 import entity.KhoaHoc;
 
 /**
@@ -42,6 +50,31 @@ public class KhoaHocDAL implements DataAccessInterface {
         @Override
         public void update(Object object) {
 
+        }
+
+        @Override
+        public List<Object> getList(String sql) {
+                // khai báo & // khởi tạo
+                Connection connect = DbConnection.connect();
+                List<Object> listKH = new ArrayList<Object>();
+
+                try {
+                        // Statement creation
+                        Statement statement = connect.createStatement();
+                        // for retrieve data
+                        ResultSet resultSet = statement.executeQuery(sql);
+                        while (resultSet.next()) {
+                                KhoaHoc khoaHocObj = new KhoaHoc();
+                                khoaHocObj.setMaKhoaHoc((char) resultSet.getInt("maKhoaHoc"));
+                                khoaHocObj.setTenKhoaHoc(resultSet.getString("tenKhoaHoc"));
+                                listKH.add(khoaHocObj);
+                        }
+                } catch (SQLException e) {
+
+                        e.printStackTrace();
+                }
+
+                return listKH;
         }
 
 }
