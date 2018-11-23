@@ -5,7 +5,6 @@ package bll;
 
 import java.util.List;
 
-import dal.Data;
 import dal.KhoaHocDAL;
 
 /**
@@ -30,7 +29,7 @@ public class KhoaHocBLL implements BusinessInterface {
                 // insert to list
                 khoaHocDAL.insert(object);
                 // show list
-                khoaHocDAL.show(Data.khoaHocs);
+               // khoaHocDAL.show(Data.khoaHocs);
 
                 // ins
         }
@@ -46,8 +45,8 @@ public class KhoaHocBLL implements BusinessInterface {
         }
 
         @Override
-        public void show(Object[] objects) {
-
+        public void show(List<Object> objects) {
+                khoaHocDAL.show(objects);
         }
 
         @Override

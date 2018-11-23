@@ -22,14 +22,14 @@ public class KhoaHocDAL implements DataAccessInterface {
         private static int dem = 0;
 
         @Override
-        public void show(Object[] objects) {
+        public void show(List<Object> objects) {
                 String result = "";
-                KhoaHoc[] khoaHocs = (KhoaHoc[]) objects;
-                for (KhoaHoc khoaHoc : khoaHocs) {
+
+                for (Object object : objects) {
+                        KhoaHoc khoaHoc = (KhoaHoc) object;
                         if (khoaHoc != null) {
                                 result += khoaHoc.toString();
                         }
-
                 }
                 System.out.println(result);
         }

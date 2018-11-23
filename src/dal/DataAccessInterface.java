@@ -19,7 +19,7 @@ public interface DataAccessInterface {
          * Description: hiển thị danh sách đối tượng
          * Version 1.0
          */
-        void show(Object[] objects);
+        void show(List<Object> objects);
 
         /**
          * Create by: HQTrung - CTO VnLearn

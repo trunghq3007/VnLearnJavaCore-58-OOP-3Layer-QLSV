@@ -32,7 +32,8 @@ public class Main {
                 // KhoaHoc khoaHoc = new KhoaHoc('1', "Java Core 58");
                 // khoaHocBLL.insert(khoaHoc);
                 listKH = khoaHocBLL.getList("select * from KhoaHoc");
-                System.out.println(listKH.size()+"");
+                System.out.println(listKH.size() + "");
+                khoaHocBLL.show(listKH);
 
         }
 

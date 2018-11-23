@@ -53,7 +53,7 @@ public interface BusinessInterface {
          * Version 1.0
          * @param objects
          */
-        void show(Object[] objects);
+        void show(List<Object> objects);
 
         /**
          * Create by: HQTrung - CTO VnLearn

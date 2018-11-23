@@ -15,8 +15,8 @@ public class DiemDAL implements DataAccessInterface {
        
        private static int dem = 0;
         @Override
-        public void show(Object[] objects) {
-                Diem[] diems = (Diem[]) objects;
+        public void show(List<Object> objects) {
+                Diem[] diems = (Diem[]) objects.toArray();
                 for (Diem diem : diems) {
                         diem.toString();
                 }
