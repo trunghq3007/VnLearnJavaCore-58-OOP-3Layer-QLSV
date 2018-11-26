@@ -9,7 +9,7 @@ import java.util.List;
  * @author HQTrung
  *
  */
-public interface BusinessInterface {
+public interface BusinessInterface<T> {
 
         /**
          * Create by: HQTrung - CTO VnLearn
@@ -20,7 +20,7 @@ public interface BusinessInterface {
          * Version 1.0
          * @param object
          */
-        void insert(Object object);
+        void insert(T object);
 
         /**
          * Create by: HQTrung - CTO VnLearn
@@ -31,7 +31,7 @@ public interface BusinessInterface {
          * Version 1.0
          * @param object
          */
-        void delete(Object object);
+        void delete(T object);
 
         /**
          * Create by: HQTrung - CTO VnLearn
@@ -42,7 +42,7 @@ public interface BusinessInterface {
          * Version 1.0
          * @param object
          */
-        void update(Object object);
+        void update(T object);
 
         /**
          * Create by: HQTrung - CTO VnLearn
@@ -53,7 +53,7 @@ public interface BusinessInterface {
          * Version 1.0
          * @param objects
          */
-        void show(List<Object> objects);
+        void show(List<T> objects);
 
         /**
          * Create by: HQTrung - CTO VnLearn
@@ -65,6 +65,6 @@ public interface BusinessInterface {
          * @param sql
          * @return
          */
-        public List<Object> getList(String sql);
+        public List<T> getList(String sql);
 
 }

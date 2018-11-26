@@ -26,15 +26,18 @@ public class Main {
          * @param args
          */
         public static void main(String[] args) {
-                List<Object> listKH;
+
+                List<KhoaHoc> listKH;
                 // khai báo và khởi tạo
                 KhoaHocBLL khoaHocBLL = new KhoaHocBLL();
-                // KhoaHoc khoaHoc = new KhoaHoc('1', "Java Core 58");
-                // khoaHocBLL.insert(khoaHoc);
+
                 listKH = khoaHocBLL.getList("select * from KhoaHoc");
                 System.out.println(listKH.size() + "");
-                khoaHocBLL.show(listKH);
+                // khoaHocBLL.show(listKH);
 
+                // KhoaHoc khoaHoc = new KhoaHoc("vnl-j60", "Java Core 60");
+                // khoaHocBLL.insert(khoaHoc);
+                khoaHocBLL.show(listKH);
         }
 
 }

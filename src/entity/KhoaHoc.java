@@ -9,7 +9,7 @@ package entity;
  */
 public class KhoaHoc {
         // mã khóa học
-        private char maKhoaHoc;
+        private String maKhoaHoc;
         // tên khóa học
         private String tenKhoaHoc;
 
@@ -17,7 +17,7 @@ public class KhoaHoc {
          * @param maKhoaHoc
          * @param tenKhoaHoc
          */
-        public KhoaHoc(char maKhoaHoc, String tenKhoaHoc) {
+        public KhoaHoc(String maKhoaHoc, String tenKhoaHoc) {
                 this.maKhoaHoc = maKhoaHoc;
                 this.tenKhoaHoc = tenKhoaHoc;
         }
@@ -33,11 +33,11 @@ public class KhoaHoc {
                 return "KhoaHoc [maKhoaHoc=" + maKhoaHoc + ", tenKhoaHoc=" + tenKhoaHoc + "]";
         }
 
-        public char getMaKhoaHoc() {
+        public String getMaKhoaHoc() {
                 return maKhoaHoc;
         }
 
-        public void setMaKhoaHoc(char maKhoaHoc) {
+        public void setMaKhoaHoc(String maKhoaHoc) {
                 this.maKhoaHoc = maKhoaHoc;
         }
 

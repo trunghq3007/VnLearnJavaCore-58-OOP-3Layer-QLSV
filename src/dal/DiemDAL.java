@@ -11,43 +11,32 @@ import entity.Diem;
  * @author HQTrung
  *
  */
-public class DiemDAL implements DataAccessInterface {
-       
-       private static int dem = 0;
-        @Override
-        public void show(List<Object> objects) {
-                Diem[] diems = (Diem[]) objects.toArray();
-                for (Diem diem : diems) {
-                        diem.toString();
-                }
-        }
+public class DiemDAL implements DataAccessInterface<Diem> {
 
         @Override
-        public void insert(Object object) {
-                while (dem < 100) {
-                        Diem diem = (Diem) object;
-                        Data.diems[dem] = diem;
-                        dem++;
-                }
+        public void show(List<Diem> objects) {
 
         }
 
         @Override
-        public void delete(Object object) {
+        public boolean insert(Diem object) {
+                return true;
+        }
+
+        @Override
+        public int delete(Diem object) {
+                return 0;
 
         }
 
         @Override
-        public void update(Object object) {
+        public int update(Diem object) {
+                return 0;
 
         }
 
-        /* (non-Javadoc)
-         * @see dal.DataAccessInterface#getList()
-         */
         @Override
-        public List<Object> getList(String sql) {
-                
+        public List<Diem> getList(String sql) {
                 return null;
         }
 

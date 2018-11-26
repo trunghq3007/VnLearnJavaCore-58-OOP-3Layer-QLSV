@@ -4,6 +4,7 @@
 package dal;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,46 +18,13 @@ import entity.KhoaHoc;
  * @author HQTrung
  *
  */
-public class KhoaHocDAL implements DataAccessInterface {
-
-        private static int dem = 0;
+public class KhoaHocDAL implements DataAccessInterface<KhoaHoc> {
 
         @Override
-        public void show(List<Object> objects) {
-                String result = "";
-
-                for (Object object : objects) {
-                        KhoaHoc khoaHoc = (KhoaHoc) object;
-                        if (khoaHoc != null) {
-                                result += khoaHoc.toString();
-                        }
-                }
-                System.out.println(result);
-        }
-
-        @Override
-        public void insert(Object object) {
-                KhoaHoc khoaHoc = (KhoaHoc) object;
-                Data.khoaHocs[dem] = khoaHoc;
-                dem++;
-
-        }
-
-        @Override
-        public void delete(Object object) {
-
-        }
-
-        @Override
-        public void update(Object object) {
-
-        }
-
-        @Override
-        public List<Object> getList(String sql) {
+        public List<KhoaHoc> getList(String sql) {
                 // khai báo & // khởi tạo
                 Connection connect = DbConnection.connect();
-                List<Object> listKH = new ArrayList<Object>();
+                List<KhoaHoc> listKH = new ArrayList<KhoaHoc>();
 
                 try {
                         // Statement creation
@@ -65,7 +33,7 @@ public class KhoaHocDAL implements DataAccessInterface {
                         ResultSet resultSet = statement.executeQuery(sql);
                         while (resultSet.next()) {
                                 KhoaHoc khoaHocObj = new KhoaHoc();
-                                khoaHocObj.setMaKhoaHoc((char) resultSet.getInt("maKhoaHoc"));
+                                khoaHocObj.setMaKhoaHoc(resultSet.getString("maKhoaHoc"));
                                 khoaHocObj.setTenKhoaHoc(resultSet.getString("tenKhoaHoc"));
                                 listKH.add(khoaHocObj);
                         }
@@ -75,6 +43,50 @@ public class KhoaHocDAL implements DataAccessInterface {
                 }
 
                 return listKH;
+        }
+
+        @Override
+        public void show(List<KhoaHoc> objects) {
+                System.out.println(objects.toString());
+        }
+
+        @Override
+        public boolean insert(KhoaHoc khoaHoc) {
+                Connection connect = DbConnection.connect();
+                String sql = "insert into KhoaHoc Values(?,?)";
+
+                try {
+                        // connect.setAutoCommit(true);
+                        PreparedStatement prepare = connect.prepareStatement(sql);
+
+                        prepare.setString(1, khoaHoc.getMaKhoaHoc());
+                        prepare.setString(2, khoaHoc.getTenKhoaHoc());
+                        prepare.executeUpdate();
+                        // connect.setAutoCommit(false);
+                } catch (Exception e) {
+                        e.printStackTrace();
+                        return false;
+                } finally {
+                        try {
+                                connect.close();
+                        } catch (SQLException e) {
+                                e.printStackTrace();
+                        }
+                }
+                return true;
+
+        }
+
+        @Override
+        public int delete(KhoaHoc object) {
+                return 0;
+
+        }
+
+        @Override
+        public int update(KhoaHoc object) {
+                return 0;
+
         }
 
 }

@@ -6,12 +6,13 @@ package bll;
 import java.util.List;
 
 import dal.KhoaHocDAL;
+import entity.KhoaHoc;
 
 /**
  * @author HQTrung
  *
  */
-public class KhoaHocBLL implements BusinessInterface {
+public class KhoaHocBLL implements BusinessInterface<KhoaHoc> {
         /**
          * khoaHocDAL
          */
@@ -25,32 +26,32 @@ public class KhoaHocBLL implements BusinessInterface {
         }
 
         @Override
-        public void insert(Object object) {
+        public void insert(KhoaHoc object) {
                 // insert to list
                 khoaHocDAL.insert(object);
                 // show list
-               // khoaHocDAL.show(Data.khoaHocs);
+                // khoaHocDAL.show(Data.khoaHocs);
 
                 // ins
         }
 
         @Override
-        public void delete(Object object) {
+        public void delete(KhoaHoc object) {
 
         }
 
         @Override
-        public void update(Object object) {
+        public void update(KhoaHoc object) {
 
         }
 
         @Override
-        public void show(List<Object> objects) {
+        public void show(List<KhoaHoc> objects) {
                 khoaHocDAL.show(objects);
         }
 
         @Override
-        public List<Object> getList(String sql) {
+        public List<KhoaHoc> getList(String sql) {
                 return khoaHocDAL.getList(sql);
 
         }

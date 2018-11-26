@@ -9,7 +9,7 @@ import java.util.List;
  * @author HQTrung
  *
  */
-public interface DataAccessInterface {
+public interface DataAccessInterface<T> {
 
         /**
          * Create by: HQTrung - CTO VnLearn
@@ -19,7 +19,7 @@ public interface DataAccessInterface {
          * Description: hiển thị danh sách đối tượng
          * Version 1.0
          */
-        void show(List<Object> objects);
+        void show(List<T> objects);
 
         /**
          * Create by: HQTrung - CTO VnLearn
@@ -30,7 +30,7 @@ public interface DataAccessInterface {
          * Version 1.0
          * @param object
          */
-        void insert(Object object);
+        boolean insert(T object);
 
         /**
          * Create by: HQTrung - CTO VnLearn
@@ -41,7 +41,7 @@ public interface DataAccessInterface {
          * Version 1.0
          * @param object
          */
-        void delete(Object object);
+        int delete(T object);
 
         /**
          * Create by: HQTrung - CTO VnLearn
@@ -52,7 +52,7 @@ public interface DataAccessInterface {
          * Version 1.0
          * @param object
          */
-        void update(Object object);
+        int update(T object);
 
         /**
          * Create by: HQTrung - CTO VnLearn
@@ -63,6 +63,6 @@ public interface DataAccessInterface {
          * Version 1.0
          * @return
          */
-        public List<Object> getList(String sql);
+        public List<T> getList(String sql);
 
 }
