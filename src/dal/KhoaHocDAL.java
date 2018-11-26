@@ -78,14 +78,59 @@ public class KhoaHocDAL implements DataAccessInterface<KhoaHoc> {
         }
 
         @Override
-        public int delete(KhoaHoc object) {
-                return 0;
+        public int delete(KhoaHoc khoaHoc) {
+                int result = 0;
+                Connection connect = DbConnection.connect();
+                String sql = "delete from KhoaHoc where maKhoaHoc = (?)";
+
+                try {
+                        // connect.setAutoCommit(true);
+                        PreparedStatement prepare = connect.prepareStatement(sql);
+
+                        prepare.setString(1, khoaHoc.getMaKhoaHoc());
+
+                        result = prepare.executeUpdate();
+                        // connect.setAutoCommit(false);
+                } catch (Exception e) {
+                        e.printStackTrace();
+                        return 0;
+                } finally {
+                        try {
+                                connect.close();
+                        } catch (SQLException e) {
+                                e.printStackTrace();
+                        }
+                }
+                return result;
 
         }
 
         @Override
-        public int update(KhoaHoc object) {
-                return 0;
+        public int update(KhoaHoc khoaHoc) {
+                int result = 0;
+                Connection connect = DbConnection.connect();
+                String sql = "Update KhoaHoc set tenKhoaHoc = ? where maKhoaHoc = ?";
+
+                try {
+                        // connect.setAutoCommit(true);
+                        PreparedStatement prepare = connect.prepareStatement(sql);
+
+                        prepare.setString(2, khoaHoc.getMaKhoaHoc());
+                        prepare.setString(1, khoaHoc.getTenKhoaHoc());
+                        result = prepare.executeUpdate();
+                        // connect.setAutoCommit(false);
+                } catch (Exception e) {
+                        e.printStackTrace();
+                        return 0;
+                } finally {
+                        try {
+                                connect.close();
+                        } catch (SQLException e) {
+                                e.printStackTrace();
+                        }
+                }
+
+                return result;
 
         }
 

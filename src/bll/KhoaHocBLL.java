@@ -29,19 +29,17 @@ public class KhoaHocBLL implements BusinessInterface<KhoaHoc> {
         public void insert(KhoaHoc object) {
                 // insert to list
                 khoaHocDAL.insert(object);
-                // show list
-                // khoaHocDAL.show(Data.khoaHocs);
-
-                // ins
-        }
-
-        @Override
-        public void delete(KhoaHoc object) {
 
         }
 
         @Override
-        public void update(KhoaHoc object) {
+        public void delete(KhoaHoc khoaHoc) {
+                khoaHocDAL.delete(khoaHoc);
+        }
+
+        @Override
+        public void update(KhoaHoc khoaHoc) {
+                khoaHocDAL.update(khoaHoc);
 
         }
 

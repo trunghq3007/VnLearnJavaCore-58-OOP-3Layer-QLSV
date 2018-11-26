@@ -31,13 +31,18 @@ public class Main {
                 // khai báo và khởi tạo
                 KhoaHocBLL khoaHocBLL = new KhoaHocBLL();
 
-                listKH = khoaHocBLL.getList("select * from KhoaHoc");
-                System.out.println(listKH.size() + "");
+                // System.out.println(listKH.size() + "");
                 // khoaHocBLL.show(listKH);
 
-                // KhoaHoc khoaHoc = new KhoaHoc("vnl-j60", "Java Core 60");
+                KhoaHoc khoaHoc = new KhoaHoc("vnl-j58", "Java Core 600");
                 // khoaHocBLL.insert(khoaHoc);
+                // khoaHocBLL.delete(khoaHoc);
+                khoaHocBLL.update(khoaHoc);
+                listKH = khoaHocBLL.getList("select * from KhoaHoc");
+
                 khoaHocBLL.show(listKH);
+                
+                
         }
 
 }
