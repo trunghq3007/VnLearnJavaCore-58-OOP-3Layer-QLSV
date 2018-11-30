@@ -28,7 +28,13 @@ public class KhoaHocBLL implements BusinessInterface<KhoaHoc> {
         @Override
         public void insert(KhoaHoc object) {
                 // insert to list
-                khoaHocDAL.insert(object);
+                boolean insertSuccess = false;
+                insertSuccess = khoaHocDAL.insert(object);
+                if (insertSuccess) {
+                        System.out.println("insert thành công");
+                } else {
+                        System.out.println("insert thất bại");
+                }
 
         }
 
