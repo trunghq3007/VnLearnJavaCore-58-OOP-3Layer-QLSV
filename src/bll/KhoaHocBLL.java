@@ -1,63 +1,43 @@
-/**
- * 
- */
 package bll;
 
 import java.util.List;
+import java.util.Objects;
 
 import dal.KhoaHocDAL;
 import entity.KhoaHoc;
 
-/**
- * @author HQTrung
- *
- */
-public class KhoaHocBLL implements BusinessInterface<KhoaHoc> {
-        /**
-         * khoaHocDAL
-         */
-        private KhoaHocDAL khoaHocDAL;
-
-        /**
-         * 
-         */
-        public KhoaHocBLL() {
-                khoaHocDAL = new KhoaHocDAL();
+public class KhoaHocBLL implements InterfaceBLL<KhoaHoc>{
+         private KhoaHocDAL khDal;
+         public KhoaHocBLL() {
+                khDal = new KhoaHocDAL();
         }
-
-        @Override
-        public void insert(KhoaHoc object) {
-                // insert to list
-                boolean insertSuccess = false;
-                insertSuccess = khoaHocDAL.insert(object);
-                if (insertSuccess) {
-                        System.out.println("insert thành công");
-                } else {
-                        System.out.println("insert thất bại");
-                }
-
-        }
-
-        @Override
-        public void delete(KhoaHoc khoaHoc) {
-                khoaHocDAL.delete(khoaHoc);
-        }
-
-        @Override
-        public void update(KhoaHoc khoaHoc) {
-                khoaHocDAL.update(khoaHoc);
-
-        }
-
-        @Override
-        public void show(List<KhoaHoc> objects) {
-                khoaHocDAL.show(objects);
-        }
-
         @Override
         public List<KhoaHoc> getList(String sql) {
-                return khoaHocDAL.getList(sql);
-
+                 return khDal.getList(sql);
         }
 
+        @Override
+        public void insert(KhoaHoc ojbect) {
+                khDal.insert(ojbect);
+                
+        }
+
+        @Override
+        public void delete(KhoaHoc object) {
+                khDal.delete(object);
+        }
+
+        @Override
+        public void update(KhoaHoc ojbect) {
+                khDal.update(ojbect);
+        }
+
+        @Override
+        public void show(List<KhoaHoc> object) {
+                khDal.show(object);
+                
+        }
+
+       
+       
 }

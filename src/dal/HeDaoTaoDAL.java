@@ -9,25 +9,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import connecttodata.ConnectToData;
-import entity.Diem;
 
+import entity.HeDaoTao;
 
-public class DiemDAL implements InterfaceDAL<Diem>{
+public class HeDaoTaoDAL implements InterfaceDAL<HeDaoTao>{
         Connection cnn = ConnectToData.connect();
         @Override
-        public List<Diem> getList(String sql) {
-                List<Diem> listKH = new ArrayList<>();
+        public List<HeDaoTao> getList(String sql) {
+                List<HeDaoTao> listKH = new ArrayList<>();
                 try {
                         Statement stm = cnn.createStatement();
                         ResultSet rs = stm.executeQuery(sql);
                         while(rs.next()) {
-                                Diem diemObj = new Diem();
-                                diemObj.setMaSV(rs.getString("maSV"));
-                                diemObj.setmaMH(rs.getString("maMH"));
-                                diemObj.sethocKy(rs.getInt("hocKy"));
-                                diemObj.setDiemLan1(rs.getInt("diemLan1"));
-                                diemObj.setDiemlan2(rs.getInt("diemLan2"));
-                                listKH.add(diemObj);
+                                HeDaoTao hdtObj = new HeDaoTao();
+                                hdtObj.setmaHeDT(rs.getString("maHeDT"));
+                                hdtObj.setTenHeDT(rs.getString("tenHeDT"));
+                                listKH.add(hdtObj);
                         }
                 } catch (SQLException e) {
                         // TODO Auto-generated catch block
@@ -38,21 +35,18 @@ public class DiemDAL implements InterfaceDAL<Diem>{
         }
 
         @Override
-        public void show(List<Diem> objects) {
+        public void show(List<HeDaoTao> objects) {
                 System.out.println(objects.toString());
                 
         }
 
         @Override
-        public boolean insert(Diem object) {
-                String sql ="INSERT INTO Diem VALUES(?,?,?,?,?)";
+        public boolean insert(HeDaoTao object) {
+                String sql ="INSERT INTO HeDT VALUES(?,?)";
                 try {
                         PreparedStatement prepared = cnn.prepareStatement(sql);
-                        prepared.setString(1, object.getMaSV());
-                        prepared.setString(2, object.getmaMH());
-                        prepared.setInt(3, object.gethocKy());
-                        prepared.setInt(4, object.getDiemLan1());
-                        prepared.setInt(5, object.getDiemlan2());
+                        prepared.setString(1, object.getmaHeDT());
+                        prepared.setString(2, object.getTenHeDT());
                         prepared.executeUpdate();
                         
                 } catch (SQLException e) {
@@ -71,12 +65,12 @@ public class DiemDAL implements InterfaceDAL<Diem>{
         }
 
         @Override
-        public int delete(Diem object) {
+        public int delete(HeDaoTao object) {
                 int result = 0;
-                String sql ="delete from Diem where maSV = (?)";
+                String sql ="delete from HeDT where maHeDT = (?)";
                 try {
                         PreparedStatement prepared = cnn.prepareStatement(sql);
-                        prepared.setString(1, object.getMaSV());
+                        prepared.setString(1, object.getmaHeDT());
                         result= prepared.executeUpdate();
                 } catch (SQLException e) {
                         // TODO Auto-generated catch block
@@ -95,16 +89,13 @@ public class DiemDAL implements InterfaceDAL<Diem>{
         }
 
         @Override
-        public int update(Diem object) {
+        public int update(HeDaoTao object) {
                 int result = 0;
-                String sql ="update Diem set HocKy = ? , DiemLan1 = ? , DiemLan2 = ? where maSV = ? ";
+                String sql ="update KhoaHoc set tenHeDT =? where maHeDT = ? ";
                 try {
                         PreparedStatement prepared = cnn.prepareStatement(sql);
-                        prepared.setString(4, object.getMaSV());
-                        
-                        prepared.setInt(1, object.gethocKy());
-                        prepared.setInt(2, object.getDiemLan1());
-                        prepared.setInt(3, object.getDiemlan2());
+                        prepared.setString(2, object.getmaHeDT());
+                        prepared.setString(1, object.getTenHeDT());
                         result= prepared.executeUpdate();
                 } catch (SQLException e) {
                         // TODO Auto-generated catch block
@@ -121,6 +112,5 @@ public class DiemDAL implements InterfaceDAL<Diem>{
                 
                 return result;
         }
-        
 
 }

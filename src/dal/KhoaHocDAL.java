@@ -1,6 +1,3 @@
-/**
- * 
- */
 package dal;
 
 import java.sql.Connection;
@@ -11,37 +8,29 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import common.DbConnection;
+import connecttodata.ConnectToData;
 import entity.KhoaHoc;
 
-/**
- * @author HQTrung
- *
- */
-public class KhoaHocDAL implements DataAccessInterface<KhoaHoc> {
-
+public class KhoaHocDAL implements InterfaceDAL<KhoaHoc>{
+        Connection cnn = ConnectToData.connect();
         @Override
         public List<KhoaHoc> getList(String sql) {
-                // khai báo & // khởi tạo
-                Connection connect = DbConnection.connect();
-                List<KhoaHoc> listKH = new ArrayList<KhoaHoc>();
-
+                
+                List<KhoaHoc> listKH = new ArrayList<>();
                 try {
-                        // Statement creation
-                        Statement statement = connect.createStatement();
-                        // for retrieve data
-                        ResultSet resultSet = statement.executeQuery(sql);
-                        while (resultSet.next()) {
-                                KhoaHoc khoaHocObj = new KhoaHoc();
-                                khoaHocObj.setMaKhoaHoc(resultSet.getString("maKhoaHoc"));
-                                khoaHocObj.setTenKhoaHoc(resultSet.getString("tenKhoaHoc"));
-                                listKH.add(khoaHocObj);
+                        Statement stm = cnn.createStatement();
+                        ResultSet rs = stm.executeQuery(sql);
+                        while(rs.next()) {
+                                KhoaHoc khObj = new KhoaHoc();
+                                khObj.setMaKhoaHoc(rs.getString("maKhoaHoc"));
+                                khObj.setTenKhoaHoc(rs.getString("tenKhoaHoc"));
+                                listKH.add(khObj);
                         }
                 } catch (SQLException e) {
-
+                        // TODO Auto-generated catch block
                         e.printStackTrace();
                 }
-
+                
                 return listKH;
         }
 
@@ -51,87 +40,79 @@ public class KhoaHocDAL implements DataAccessInterface<KhoaHoc> {
         }
 
         @Override
-        public boolean insert(KhoaHoc khoaHoc) {
-                Connection connect = DbConnection.connect();
-                String sql = "insert into KhoaHoc Values(?,?)";
-
+        public boolean insert(KhoaHoc object) {
+                String sql ="INSERT INTO KhoaHoc VALUES(?,?)";
                 try {
-                        // connect.setAutoCommit(true);
-                        PreparedStatement prepare = connect.prepareStatement(sql);
-
-                        prepare.setString(1, khoaHoc.getMaKhoaHoc());
-                        prepare.setString(2, khoaHoc.getTenKhoaHoc());
-                        prepare.executeUpdate();
-                        // connect.setAutoCommit(false);
-                } catch (Exception e) {
+                        PreparedStatement prepared = cnn.prepareStatement(sql);
+                        prepared.setString(1, object.getMaKhoaHoc());
+                        prepared.setString(2, object.getTenKhoaHoc());
+                        prepared.executeUpdate();
+                        
+                } catch (SQLException e) {
+                        // TODO Auto-generated catch block
                         e.printStackTrace();
                         return false;
-                } finally {
+                }finally {
                         try {
-                                connect.close();
+                                cnn.close();
                         } catch (SQLException e) {
+                                // TODO Auto-generated catch block
                                 e.printStackTrace();
                         }
                 }
                 return true;
-
         }
 
         @Override
-        public int delete(KhoaHoc khoaHoc) {
+        public int delete(KhoaHoc object) {
                 int result = 0;
-                Connection connect = DbConnection.connect();
-                String sql = "delete from KhoaHoc where maKhoaHoc = (?)";
-
+                String sql ="delete from KhoaHoc where maKhoaHoc = (?)";
                 try {
-                        // connect.setAutoCommit(true);
-                        PreparedStatement prepare = connect.prepareStatement(sql);
-
-                        prepare.setString(1, khoaHoc.getMaKhoaHoc());
-
-                        result = prepare.executeUpdate();
-                        // connect.setAutoCommit(false);
-                } catch (Exception e) {
+                        PreparedStatement prepared = cnn.prepareStatement(sql);
+                        prepared.setString(1, object.getMaKhoaHoc());
+                        result= prepared.executeUpdate();
+                } catch (SQLException e) {
+                        // TODO Auto-generated catch block
                         e.printStackTrace();
                         return 0;
-                } finally {
+                }finally {
                         try {
-                                connect.close();
+                                cnn.close();
                         } catch (SQLException e) {
+                                // TODO Auto-generated catch block
                                 e.printStackTrace();
                         }
                 }
+                
                 return result;
-
+                
         }
 
         @Override
-        public int update(KhoaHoc khoaHoc) {
+        public int update(KhoaHoc object) {
                 int result = 0;
-                Connection connect = DbConnection.connect();
-                String sql = "Update KhoaHoc set tenKhoaHoc = ? where maKhoaHoc = ?";
-
+                String sql ="update KhoaHoc set tenKhoaHoc =? where maKhoaHoc = ? ";
                 try {
-                        // connect.setAutoCommit(true);
-                        PreparedStatement prepare = connect.prepareStatement(sql);
-
-                        prepare.setString(2, khoaHoc.getMaKhoaHoc());
-                        prepare.setString(1, khoaHoc.getTenKhoaHoc());
-                        result = prepare.executeUpdate();
-                        // connect.setAutoCommit(false);
-                } catch (Exception e) {
+                        PreparedStatement prepared = cnn.prepareStatement(sql);
+                        prepared.setString(2, object.getMaKhoaHoc());
+                        prepared.setString(1, object.getTenKhoaHoc());
+                        result= prepared.executeUpdate();
+                } catch (SQLException e) {
+                        // TODO Auto-generated catch block
                         e.printStackTrace();
                         return 0;
-                } finally {
+                }finally {
                         try {
-                                connect.close();
+                                cnn.close();
                         } catch (SQLException e) {
+                                // TODO Auto-generated catch block
                                 e.printStackTrace();
                         }
                 }
-
+                
                 return result;
-
         }
+
+        
 
 }

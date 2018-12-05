@@ -20,6 +20,10 @@ public class KhoaHoc {
         public KhoaHoc(String maKhoaHoc, String tenKhoaHoc) {
                 this.maKhoaHoc = maKhoaHoc;
                 this.tenKhoaHoc = tenKhoaHoc;
+            }
+        public KhoaHoc(String maKhoaHoc) {
+                this.maKhoaHoc = maKhoaHoc;
+                
         }
 
         /**
@@ -37,8 +41,8 @@ public class KhoaHoc {
                 return maKhoaHoc;
         }
 
-        public void setMaKhoaHoc(String maKhoaHoc) {
-                this.maKhoaHoc = maKhoaHoc;
+        public void setMaKhoaHoc(String string) {
+                this.maKhoaHoc = string;
         }
 
         public String getTenKhoaHoc() {

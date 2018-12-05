@@ -1,269 +1,361 @@
-/**
- * 
- */
 package view;
 
-import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import java.sql.Date;
 import java.util.List;
 import java.util.Scanner;
 
+import bll.DiemBLL;
+import bll.HeDaoTaoBLL;
 import bll.KhoaHocBLL;
-import dal.Data;
+import bll.SinhVienBLL;
+import dal.SinhVienDAL;
 import entity.Diem;
+import entity.HeDaoTao;
 import entity.KhoaHoc;
+import entity.SinhVien;
 
-/**
- * @author HQTrung
- *
- */
 public class Main {
+        static Scanner sc = new Scanner(System.in);
+        static int choose = 0;
+        static boolean conti = false;
 
-        /**
-         * 
-         */
-        private static final String BẠN_MUỐN_TIẾP_TỤC_KHÔNG_Y_N = "Bạn muốn tiếp tục không?(y/n): ";
-
-        /**
-         * Create by: HQTrung - CTO VnLearn
-         * Create date: Nov 18, 2018
-         * Modifier: HQTrung
-         * Modified date: Nov 18, 2018
-         * Description: ....
-         * Version 1.0
-         * @param args
-         */
         public static void main(String[] args) {
 
-                /*
-                 * List<KhoaHoc> listKH; // khai báo và khởi tạo KhoaHocBLL khoaHocBLL = new
-                 * KhoaHocBLL();
-                 * 
-                 * // System.out.println(listKH.size() + ""); // khoaHocBLL.show(listKH);
-                 * 
-                 * KhoaHoc khoaHoc = new KhoaHoc("vnl-j58", "Java Core 600"); //
-                 * khoaHocBLL.insert(khoaHoc); // khoaHocBLL.delete(khoaHoc);
-                 * khoaHocBLL.update(khoaHoc); listKH =
-                 * khoaHocBLL.getList("select * from KhoaHoc");
-                 * 
-                 * khoaHocBLL.show(listKH);
-                 */
-
-                System.out.println("HỆ THỐNG QUẢN LÍ SINH VIÊN");
+                System.out.println("Hệ Thống Quản Lý Sinh Viên");
                 System.out.println("==========================");
-                // hiện thị menu
+
+                
+//                  List<SinhVien> list; 
+//                  SinhVienDAL bll = new SinhVienDAL(); 
+//                  list = bll.getList("select * from SinhVien"); 
+//                  bll.show(list);
+//                 
                 showMenu();
-
         }
 
-        /**
-         * Create by: HQTrung - CTO VnLearn
-         * Create date: Nov 30, 2018
-         * Modifier: HQTrung
-         * Modified date: Nov 30, 2018
-         * Description: ....
-         * Version 1.0
-         * @throws IOException 
-         */
-        private static void showMenu() {
-                int chooseFunction = 0;
-                Scanner scanner = new Scanner(System.in);
+        public static void showMenu() {
+
+                int chon = 0;
                 do {
-
-                        System.out.println("Menu:");
-                        System.out.println("1. Quản Lí Điểm");
-                        System.out.println("2. Quản Lí Hệ Đào Tạo");
-                        System.out.println("3. Quản Lí Khoa");
-                        System.out.println("4. Quản Lí Khóa Học");
-                        System.out.println("5. Quản Lí Lớp");
-                        System.out.println("6. Quản Lí Môn Học");
-                        System.out.println("7. Quản Lí Sinh Viên");
-                        System.out.println("8. Thoát");
-
+                        System.out.println("Menu: ");
+                        System.out.println("1.Quản lý điểm.");
+                        System.out.println("2.Quản lý Hệ đào tạo.");
+                        System.out.println("3.Quản lý Khoa.");
+                        System.out.println("4.Quản lý Khóa Học.");
+                        System.out.println("5.Quản lý Lớp.");
+                        System.out.println("6.Quản lý Môn Học.");
+                        System.out.println("7.Quản lý Sinh Viên.");
+                        System.out.println("0.Thoát");
+                        System.out.println("----------------------");
                         do {
-                                System.out.println("Chọn chức năng: [1,8]");
-                                chooseFunction = scanner.nextInt();
-                        } while (chooseFunction < 1 || chooseFunction > 8);
+                                System.out.println("Chọn chức năng : ");
+                                chon = sc.nextInt();
+                        } while (chon < 0 || chon > 7);
+                        switch (chon) {
+                        case 1:
+                                quanLyDiem();
+                                break;
+                        case 2:
+                                quanLyHDT();
+                                break;
+                        case 3:
+                                quanLyKhoa();
+                                break;
+                        case 4:
+                                quanLyKhoaHoc();
+                                break;
+                        case 5:
+                                quanLyLop();
+                                break;
+                        case 6:
+                                quanLyMonHoc();
+                                break;
+                        case 7:
+                                quanLySinhVien();
+                                break;
+                        case 0:
+                                thoat();
+                                break;
 
-                        // xử lí từng trường hợp
-                        switch (chooseFunction) {
-                                // 1. Quản Lí Điểm
-                                case 1:
-                                        quanLiDiem();
-                                        break;
-                                // 2. Quản Lí Hệ Đào Tạo
-                                case 2:
-                                        quanLiKhoa();
-                                        break;
-                                // 3. Quản Lí Khoa
-                                case 3:
-                                        quanLiKhoa();
-                                        break;
-                                // 4. Quản Lí Khóa Học
-                                case 4:
-                                        quanLiKhoaHoc();
-                                        break;
-                                // 5. Quản Lí Lớp
-                                case 5:
-                                        quanLiMonHoc();
-                                        break;
-                                // 6. Quản Lí Môn Học
-                                case 6:
-                                        quanLiMonHoc();
-                                        break;
-                                // 7. Quản Lí Sinh Viên
-                                case 7:
-                                        quanLiSinhVien();
-                                        break;
-                                // 8. Thoát
-                                case 8:
-                                        System.exit(0);
-                                        break;
-
-                                default:
-                                        break;
+                        default:
+                                break;
                         }
-
-                } while (chooseFunction != 8);
-
-        }
-
-        /**
-         * Create by: HQTrung - CTO VnLearn
-         * Create date: Nov 30, 2018
-         * Modifier: HQTrung
-         * Modified date: Nov 30, 2018
-         * Description: ....
-         * Version 1.0
-         */
-        private static void quanLiSinhVien() {
-                // TODO Auto-generated method stub
+                } while (chon != 7);
 
         }
 
-        /**
-         * Create by: HQTrung - CTO VnLearn
-         * Create date: Nov 30, 2018
-         * Modifier: HQTrung
-         * Modified date: Nov 30, 2018
-         * Description: ....
-         * Version 1.0
-         */
-        private static void quanLiMonHoc() {
-                // TODO Auto-generated method stub
+        private static void thoat() {
+                System.out.println("Đã Thoát!!!!!!!!");
+                System.exit(0);
 
         }
 
-        /**
-         * Create by: HQTrung - CTO VnLearn
-         * Create date: Nov 30, 2018
-         * Modifier: HQTrung
-         * Modified date: Nov 30, 2018
-         * Description: ....
-         * Version 1.0
-         */
-        private static void quanLiKhoaHoc() {
-                showMenuFunction();
-
-        }
-
-        /**
-         * Create by: HQTrung - CTO VnLearn
-         * Create date: Nov 30, 2018
-         * Modifier: HQTrung
-         * Modified date: Nov 30, 2018
-         * Description: ....
-         * Version 1.0
-         */
-        private static void showMenuFunction() {
-                int chooseFunction = 0;
-                boolean continueAction = false;
-                Scanner scanner = new Scanner(System.in);
+        private static void quanLySinhVien() {
                 do {
-                        System.out.println("1. Hiển thị");
-                        System.out.println("2. Thêm");
-                        System.out.println("3. Xóa");
-                        System.out.println("4. Sửa");
-                        System.out.println("5. Thoát");
+                        System.out.println("1. Hiển Thị ");
+                        System.out.println("2. Thêm ");
+                        System.out.println("3. Xóa ");
+                        System.out.println("4. Sửa ");
+                        System.out.println("0. Thoát");
+                        System.out.println("=============");
                         do {
-                                System.out.println("Nhập chức năng: ");
-                                chooseFunction = scanner.nextInt();
-                        } while (chooseFunction < 1 || chooseFunction > 5);
+                                System.out.println("Ban chọn: ");
+                                choose = sc.nextInt();
+                        } while (choose < 0 || choose > 4);
+                        SinhVienBLL svBLL = new SinhVienBLL();
+                        SinhVien sv = new SinhVien();
+                        List<SinhVien> listKH;
 
-                        KhoaHocBLL khoaHocBLL = new KhoaHocBLL();
-                        ;
-                        switch (chooseFunction) {
+                        switch (choose) {
+                        case 1:
+                                System.out.println("==Danh Sách SinhVien==");
+                                listKH = svBLL.getList("select * from sinhvien");
+                                svBLL.show(listKH);
+                                break;
+                        case 2:
+                                System.out.println("==Thêm danh sách==");
+                                Scanner scsv1 = new Scanner(System.in);
+                                System.out.println("Nhập mã sinh viên: ");
+                                String maSV = scsv1.nextLine();
 
-                                // hiển thị
-                                case 1:
-                                        System.out.println("Danh sách Khóa Học");
-                                        System.out.println("==================");
-                                        List<KhoaHoc> listKH;
-                                        khoaHocBLL = new KhoaHocBLL();
-                                        listKH = khoaHocBLL.getList("Select * from KhoaHoc");
-                                        khoaHocBLL.show(listKH);
-                                        break;
-                                // thêm
-                                case 2:
-                                        KhoaHoc khoaHoc = new KhoaHoc();
-                                        String tenKhoaHoc;
-                                        String maKhoaHoc;
-                                        Scanner scannerKhoaHoc = new Scanner(System.in);
-                                        System.out.println("Mã khóa học: ");
-                                        maKhoaHoc = scannerKhoaHoc.nextLine();
-                                        System.out.println("Tên khóa học: ");
-                                        tenKhoaHoc = scannerKhoaHoc.nextLine();
-                                        khoaHoc.setMaKhoaHoc(maKhoaHoc);
-                                        khoaHoc.setTenKhoaHoc(tenKhoaHoc);
-                                        khoaHocBLL.insert(khoaHoc);
+                                System.out.println("Nhập tên sinh viên: ");
+                                String tenSV = scsv1.nextLine();
+                                System.out.println("Nhập gioi tinh sinh viên: ");
+                                String gt = scsv1.nextLine();
 
-                                        break;
-                                // xóa
-                                case 3:
+                                System.out.println("Nhập ngay sinh(yyyy-MM-dd): ");
+                                String ngaysinh = scsv1.nextLine();
+                                DateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
+                                Date date;
+                                try {
+                                        date = (Date) formater.parse(ngaysinh);
+                                        sv.setNgaySinh(date);
+                                } catch (ParseException e) {
+                                        // TODO Auto-generated catch block
+                                        e.printStackTrace();
+                                }
 
-                                        break;
-                                // sửa
-                                case 4:
+                                System.out.println("Nhập que quan: ");
+                                String qqSV = scsv1.nextLine();
+                                System.out.println("Nhập malop(trùng với mã lớp ở Table Lop): ");
+                                String malop = scsv1.nextLine();
+                                sv.setMaLop(maSV);
+                                sv.setTenSV(tenSV);
+                                sv.setGioiTinh(gt);
 
-                                        break;
+                                sv.setQueQuan(qqSV);
+                                sv.setMaLop(maSV);
+                                svBLL.insert(sv);
+                                break;
+                        case 3:
+                                System.out.println("==Xóa Danh Sách==");
+                                Scanner scsv2 = new Scanner(System.in);
+                                System.out.println("Nhập mã khóa học cần xóa: ");
+                                maSV = scsv2.nextLine();
+                                sv.setMaSV(maSV);
+                                svBLL.delete(sv);
+                                break;
+                        case 4:
 
-                                default:
-                                        break;
+                                System.out.println("==Sửa Danh Sách==:");
+                                Scanner scsv3 = new Scanner(System.in);
+                                System.out.println("Nhập mã sinh viên: ");
+                                maSV = scsv3.nextLine();
+
+                                System.out.println("Nhập tên sinh viên: ");
+                                tenSV = scsv3.nextLine();
+                                System.out.println("Nhập gioi tinh sinh viên: ");
+                                gt = scsv3.nextLine();
+
+                                System.out.println("Nhập ngay sinh(M d yy): ");
+                                ngaysinh = scsv3.nextLine();
+                                formater = new SimpleDateFormat("M d yy");
+
+                                try {
+                                        date = (Date) formater.parse(ngaysinh);
+                                        sv.setNgaySinh(date);
+                                } catch (ParseException e) {
+                                        // TODO Auto-generated catch block
+                                        e.printStackTrace();
+                                }
+
+                                System.out.println("Nhập que quan: ");
+                                qqSV = scsv3.nextLine();
+                                System.out.println("Nhập malop(trùng với mã lớp ở Table Lop): ");
+                                malop = scsv3.nextLine();
+                                sv.setMaLop(maSV);
+                                sv.setTenSV(tenSV);
+                                sv.setGioiTinh(gt);
+
+                                sv.setQueQuan(qqSV);
+                                sv.setMaLop(maSV);
+                                svBLL.insert(sv);
+                                break;
+                        case 0:
+                                System.out.println("Đã Thoát!!!!!!!!");
+                                System.exit(0);
+                                break;
+
                         }
+                        System.out.println("Bạn muốn tiếp tục không (Y/N): ");
 
-                        System.out.println(BẠN_MUỐN_TIẾP_TỤC_KHÔNG_Y_N);
-                        Scanner scannerYN = new Scanner(System.in);
-                        String checkYesNo = scannerYN.nextLine();
-                        if ("y".equals(checkYesNo)) {
-                                continueAction = false;
+                        Scanner yn = new Scanner(System.in);
+                        String check = yn.nextLine();
+                        if ("y".equals(check)) {
+                                conti = false;
                         } else {
-                                continueAction = true;
+                                conti = true;
                         }
 
-                } while (!continueAction);
+                } while (!conti);
+        }
+
+        private static void quanLyMonHoc() {
 
         }
 
-        /**
-         * Create by: HQTrung - CTO VnLearn
-         * Create date: Nov 30, 2018
-         * Modifier: HQTrung
-         * Modified date: Nov 30, 2018
-         * Description: ....
-         * Version 1.0
-         */
-        private static void quanLiKhoa() {
+        private static void quanLyLop() {
+
         }
 
-        /**
-         * Create by: HQTrung - CTO VnLearn
-         * Create date: Nov 30, 2018
-         * Modifier: HQTrung
-         * Modified date: Nov 30, 2018
-         * Description: ....
-         * Version 1.0
-         */
-        private static void quanLiDiem() {
+        private static void quanLyKhoaHoc() {
+                do {
+                        System.out.println("1. Hiển Thị ");
+                        System.out.println("2. Thêm ");
+                        System.out.println("3. Xóa ");
+                        System.out.println("4. Sửa ");
+                        System.out.println("0. Thoát");
+                        System.out.println("=============");
+                        do {
+                                System.out.println("Ban chọn: ");
+                                choose = sc.nextInt();
+                        } while (choose < 0 || choose > 4);
+                        KhoaHocBLL khBLL = new KhoaHocBLL();
+                        KhoaHoc hoc = new KhoaHoc();
+                        List<KhoaHoc> listKH;
 
+                        switch (choose) {
+                        case 1:
+                                System.out.println("==Danh Sách Khóa Khọc: ");
+                                listKH = khBLL.getList("select * from KhoaHoc");
+                                khBLL.show(listKH);
+                                break;
+                        case 2:
+                                System.out.println("==Thêm danh sách: ");
+                                Scanner sc1 = new Scanner(System.in);
+                                System.out.println("Nhập mã khóa học: ");
+                                String maKH = sc1.nextLine();
+
+                                System.out.println("Nhập tên khóa học: ");
+                                String tenKH = sc1.nextLine();
+                                hoc.setMaKhoaHoc(maKH);
+                                hoc.setTenKhoaHoc(tenKH);
+                                khBLL.insert(hoc);
+                                break;
+                        case 3:
+                                System.out.println("==Xóa Danh Sách");
+                                Scanner sc3 = new Scanner(System.in);
+                                System.out.println("Nhập mã khóa học cần xóa: ");
+                                maKH = sc3.nextLine();
+                                hoc.setMaKhoaHoc(maKH);
+                                khBLL.delete(hoc);
+                                break;
+                        case 4:
+
+                                System.out.println("==Sửa Danh Sách:");
+                                Scanner sc2 = new Scanner(System.in);
+                                System.out.println("Nhập mã khóa học cần sửa: ");
+                                maKH = sc2.nextLine();
+
+                                System.out.println("Tên khóa học cần sửa: ");
+                                tenKH = sc2.nextLine();
+                                hoc.setMaKhoaHoc(maKH);
+                                hoc.setTenKhoaHoc(tenKH);
+                                khBLL.update(hoc);
+                                break;
+                        case 0:
+                                System.out.println("Đã Thoát!!!!!!!!");
+                                System.exit(0);
+                                break;
+
+                        default:
+                                break;
+                        }
+                        System.out.println("Bạn muốn tiếp tục không (Y/N): ");
+
+                        Scanner yn = new Scanner(System.in);
+                        String check = yn.nextLine();
+                        if ("y".equals(check)) {
+                                conti = false;
+                        } else {
+                                conti = true;
+                        }
+                } while (!conti);
+
+        }
+
+        private static void quanLyKhoa() {
+
+        }
+
+        private static void quanLyHDT() {
+
+        }
+
+        private static void quanLyDiem() {
+                do {
+                        System.out.println("1. Hiển Thị ");
+                        System.out.println("2. Thêm ");
+                        System.out.println("3. Xóa ");
+                        System.out.println("4. Sửa ");
+                        System.out.println("0. Thoát");
+                        System.out.println("=============");
+                        Scanner sc = new Scanner(System.in);
+                        choose = sc.nextInt();
+                        DiemBLL diemBLL = new DiemBLL();
+                        Diem diem = new Diem();
+                        List<Diem> list;
+                        do {
+
+                                switch (choose) {
+                                case 1:
+                                        System.out.println("==Danh Sách Diem== ");
+                                        list = diemBLL.getList("select * from Diem");
+                                        diemBLL.show(list);
+                                        break;
+
+                                case 2:
+
+                                        break;
+                                case 3:
+
+                                        break;
+                                case 4:
+
+                                        break;
+                                case 0:
+
+                                        break;
+
+                                default:
+                                        break;
+                                }
+                                System.out.println("Bạn muốn tiếp tục không (Y/N): ");
+
+                                Scanner yn1 = new Scanner(System.in);
+                                String check = yn1.nextLine();
+                                if ("y".equals(check)) {
+                                        conti = false;
+                                } else {
+                                        conti = true;
+                                }
+                        } while (choose < 0 || choose > 4);
+
+                } while (!conti);
         }
 
 }

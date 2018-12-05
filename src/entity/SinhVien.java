@@ -1,34 +1,61 @@
-/**
- * 
- */
 package entity;
 
-import java.util.Date;
+import java.sql.Date;
 
-/**
- * @author HQTrung
- *
- */
 public class SinhVien {
-        // mã sinh viên
-        private char maSV;
-        // tên sinh viên
+        //mã sinh viên
+        private String maSV;
+        //tên sinh viên
         private String tenSV;
-        // giới tính
+        //giới tính
         private String gioiTinh;
-        // ngày sinh
+        //ngày sinh
         private Date ngaySinh;
-        // mã lớp
-        private char maLop;
-        // quê quán
-        private String queQuan;
-
-        /**
-         * 
-         */
-        public SinhVien() {
+        //mã lớp
+        private String maLop;
+        //Quê quán
+        private  String queQuan;
+        @Override
+        public String toString() {
+                return "SinhVien [maSV=" + maSV + ", tenSV=" + tenSV + ", gioiTinh=" + gioiTinh + ", ngaySinh="
+                                + ngaySinh + ", maLop=" + maLop + ", queQuan=" + queQuan + "]";
         }
-
+        public String getMaSV() {
+                return maSV;
+        }
+        public void setMaSV(String maSV) {
+                this.maSV = maSV;
+        }
+        public String getTenSV() {
+                return tenSV;
+        }
+        public void setTenSV(String tenSV) {
+                this.tenSV = tenSV;
+        }
+        public String getGioiTinh() {
+                return gioiTinh;
+        }
+        public void setGioiTinh(String gioiTinh) {
+                this.gioiTinh = gioiTinh;
+        }
+        public Date getNgaySinh() {
+                return ngaySinh;
+        }
+        public void setNgaySinh(Date ngaySinh) {
+                this.ngaySinh = ngaySinh;
+        }
+        public String getMaLop() {
+                return maLop;
+        }
+        public void setMaLop(String maLop) {
+                this.maLop = maLop;
+        }
+        public String getQueQuan() {
+                return queQuan;
+        }
+        public void setQueQuan(String queQuan) {
+                this.queQuan = queQuan;
+        }
         /**
          * @param maSV
          * @param tenSV
@@ -37,7 +64,8 @@ public class SinhVien {
          * @param maLop
          * @param queQuan
          */
-        public SinhVien(char maSV, String tenSV, String gioiTinh, Date ngaySinh, char maLop, String queQuan) {
+        public SinhVien(String maSV, String tenSV, String gioiTinh, Date ngaySinh, String maLop, String queQuan) {
+                super();
                 this.maSV = maSV;
                 this.tenSV = tenSV;
                 this.gioiTinh = gioiTinh;
@@ -45,59 +73,16 @@ public class SinhVien {
                 this.maLop = maLop;
                 this.queQuan = queQuan;
         }
-
-        @Override
-        public String toString() {
-                return "SinhVien [maSV=" + maSV + ", tenSV=" + tenSV + ", gioiTinh=" + gioiTinh + ", maLop=" + maLop
-                                + ", queQuan=" + queQuan + "]";
-        }
-
-        public char getMaSV() {
-                return maSV;
-        }
-
-        public void setMaSV(char maSV) {
+        public SinhVien(String maSV) {
+                super();
                 this.maSV = maSV;
+                
         }
-
-        public String getTenSV() {
-                return tenSV;
+        /**
+         * 
+         */
+        public SinhVien() {
+                super();
+                // TODO Auto-generated constructor stub
         }
-
-        public void setTenSV(String tenSV) {
-                this.tenSV = tenSV;
-        }
-
-        public String getGioiTinh() {
-                return gioiTinh;
-        }
-
-        public void setGioiTinh(String gioiTinh) {
-                this.gioiTinh = gioiTinh;
-        }
-
-        public Date getNgaySinh() {
-                return ngaySinh;
-        }
-
-        public void setNgaySinh(Date ngaySinh) {
-                this.ngaySinh = ngaySinh;
-        }
-
-        public char getMaLop() {
-                return maLop;
-        }
-
-        public void setMaLop(char maLop) {
-                this.maLop = maLop;
-        }
-
-        public String getQueQuan() {
-                return queQuan;
-        }
-
-        public void setQueQuan(String queQuan) {
-                this.queQuan = queQuan;
-        }
-
 }
