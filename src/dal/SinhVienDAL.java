@@ -2,7 +2,6 @@ package dal;
 
 import java.sql.Connection;
 import java.sql.Date;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -53,7 +52,7 @@ public class SinhVienDAL implements InterfaceDAL<SinhVien>{
                         prepared.setString(1, object.getMaSV());
                         prepared.setString(2, object.getTenSV());
                         prepared.setString(3, object.getGioiTinh());
-                        prepared.setDate(4, (Date) object.getNgaySinh());
+                        prepared.setDate(4, new java.sql.Date(object.getNgaySinh().getTime()));
                         prepared.setString(5, object.getQueQuan());
                         prepared.setString(6, object.getMaLop());
                         prepared.executeUpdate();
@@ -108,7 +107,7 @@ public class SinhVienDAL implements InterfaceDAL<SinhVien>{
                         prepared.setString(6, object.getMaSV());
                         prepared.setString(1, object.getTenSV());
                         prepared.setString(2,  object.getGioiTinh());
-                        prepared.setDate(3, (java.sql.Date) object.getNgaySinh());
+                        prepared.setDate(3, (Date) object.getNgaySinh());
                         prepared.setString(4,  object.getQueQuan());
                         prepared.setString(5,  object.getMaLop());
                         

@@ -7,7 +7,7 @@ import entity.MonHoc;
 
 public class MonHocBLL implements InterfaceBLL<MonHoc>{
         private MonHocDAL monHocDAL;
-        public void MonHocDAL() {
+        public MonHocBLL() {
                 monHocDAL = new MonHocDAL();
         }
         @Override

@@ -1,21 +1,24 @@
 package view;
 
+import java.sql.PreparedStatement;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
 import bll.DiemBLL;
 import bll.HeDaoTaoBLL;
 import bll.KhoaHocBLL;
+import bll.MonHocBLL;
 import bll.SinhVienBLL;
 import dal.SinhVienDAL;
 import entity.Diem;
 import entity.HeDaoTao;
 import entity.KhoaHoc;
+import entity.MonHoc;
 import entity.SinhVien;
 
 public class Main {
@@ -28,7 +31,6 @@ public class Main {
                 System.out.println("Hệ Thống Quản Lý Sinh Viên");
                 System.out.println("==========================");
 
-                
 //                  List<SinhVien> list; 
 //                  SinhVienDAL bll = new SinhVienDAL(); 
 //                  list = bll.getList("select * from SinhVien"); 
@@ -143,12 +145,12 @@ public class Main {
                                 String qqSV = scsv1.nextLine();
                                 System.out.println("Nhập malop(trùng với mã lớp ở Table Lop): ");
                                 String malop = scsv1.nextLine();
-                                sv.setMaLop(maSV);
+                                sv.setMaSV(maSV);
                                 sv.setTenSV(tenSV);
                                 sv.setGioiTinh(gt);
 
                                 sv.setQueQuan(qqSV);
-                                sv.setMaLop(maSV);
+                                sv.setMaLop(malop);
                                 svBLL.insert(sv);
                                 break;
                         case 3:
@@ -171,9 +173,9 @@ public class Main {
                                 System.out.println("Nhập gioi tinh sinh viên: ");
                                 gt = scsv3.nextLine();
 
-                                System.out.println("Nhập ngay sinh(M d yy): ");
+                                System.out.println("Nhập ngay sinh(yyyy-MM-dd): ");
                                 ngaysinh = scsv3.nextLine();
-                                formater = new SimpleDateFormat("M d yy");
+                                formater = new SimpleDateFormat("yyyy-MM-dd");
 
                                 try {
                                         date = (Date) formater.parse(ngaysinh);
@@ -187,12 +189,12 @@ public class Main {
                                 qqSV = scsv3.nextLine();
                                 System.out.println("Nhập malop(trùng với mã lớp ở Table Lop): ");
                                 malop = scsv3.nextLine();
-                                sv.setMaLop(maSV);
+                                sv.setMaSV(maSV);
                                 sv.setTenSV(tenSV);
                                 sv.setGioiTinh(gt);
 
                                 sv.setQueQuan(qqSV);
-                                sv.setMaLop(maSV);
+                                sv.setMaLop(malop);
                                 svBLL.insert(sv);
                                 break;
                         case 0:
@@ -215,6 +217,80 @@ public class Main {
         }
 
         private static void quanLyMonHoc() {
+                /*do {
+                        System.out.println("1. Hiển Thị ");
+                        System.out.println("2. Thêm ");
+                        System.out.println("3. Xóa ");
+                        System.out.println("4. Sửa ");
+                        System.out.println("0. Thoát");
+                        System.out.println("=============");
+                        do {
+                                System.out.println("Ban chọn: ");
+                                choose = sc.nextInt();
+                        } while (choose < 0 || choose > 4);
+                        MonHoc mh = new MonHoc();
+                        List<MonHoc> listMH;
+                        MonHocBLL monHocBLL= new MonHocBLL();
+                        switch (choose) {
+                        case 1:
+                                System.out.println("==Hiển Thị Môn Học==");
+                                listMH = monHocBLL.getList("select * from MonHoc");
+                                monHocBLL.show(listMH);
+                                break;
+                        case 2:
+                                System.out.println("==Thêm Môn Học==");
+                                Scanner scmh1 = new Scanner(System.in);
+                                System.out.println("Nhập mã Môn Học: ");
+                                String mmh = scmh1.nextLine();
+                                System.out.println("Nhập tên Môn Học: ");
+                                String tmh = scmh1.nextLine();
+                                System.out.println("Nhập Số Trình[0-7]: ");
+                                int stmh = scmh1.nextInt();
+                                
+                                mh.setMaMH(mmh);
+                                mh.setTenMH(tmh);
+                                mh.setSoTrinh(stmh);
+                                monHocBLL.insert(mh);
+                                break;
+                        case 3:
+                                System.out.println("==Xóa Môn Học==");
+                                Scanner scmh2 = new Scanner(System.in);
+                                System.out.println("Nhập mã Môn Học cần Xóa: ");
+                                mmh = scmh2.nextLine();
+                                mh.setMaMH(mmh);
+                                
+                                monHocBLL.delete(mh);
+                                break;
+                        case 4:
+                                System.out.println("==Thêm Môn Học==");
+                                Scanner scmh3 = new Scanner(System.in);
+                                System.out.println("Nhập mã Môn Học: ");
+                                 mmh = scmh3.nextLine();
+                                System.out.println("Nhập tên Môn Học: ");
+                                 tmh = scmh3.nextLine();
+                                System.out.println("Nhập Số Trình[0-7]: ");
+                                 stmh = scmh3.nextInt();
+                                
+                                mh.setMaMH(mmh);
+                                mh.setTenMH(tmh);
+                                mh.setSoTrinh(stmh);
+                                monHocBLL.update(mh);
+                                break;
+                        case 0:
+                                System.out.println("==Đã Thoát==");
+                                System.exit(0);
+                                break;
+                        }
+                        System.out.println("Bạn muốn tiếp tục không (Y/N): ");
+
+                        Scanner yn = new Scanner(System.in);
+                        String check = yn.nextLine();
+                        if ("y".equals(check)) {
+                                conti = false;
+                        } else {
+                                conti = true;
+                        }
+                } while (!conti);*/
 
         }
 

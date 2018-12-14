@@ -22,8 +22,8 @@ public class MonHocDAL implements InterfaceDAL<MonHoc>{
                         ResultSet rs = stm.executeQuery(sql);
                         while(rs.next()) {
                                 MonHoc mhObj = new MonHoc();
-                                mhObj.setMaMH(rs.getString("maMonHoc"));
-                                mhObj.setTenMH(rs.getString("tenMonHoc"));
+                                mhObj.setMaMH(rs.getString("maMH"));
+                                mhObj.setTenMH(rs.getString("tenMH"));
                                 mhObj.setSoTrinh(rs.getInt("soTrinh"));
                                 
                                 
