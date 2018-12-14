@@ -218,7 +218,7 @@ public class Main {
 
         private static void quanLyMonHoc() {
                 /*do {
-                        System.out.println("1. Hiển Thị ");
+                        System.out.println("1. Hiển Thị ")
                         System.out.println("2. Thêm ");
                         System.out.println("3. Xóa ");
                         System.out.println("4. Sửa ");
